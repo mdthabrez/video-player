@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-sm-9">
+
+      <div *ngIf="!hidden">
+        <h2>New Video</h2>
+
+        <form #form="ngForm" class="well" (ngSubmit)="onSubmitAddVideo(form.value)">
+          <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input type="text" class="form-control" placeholder="Title" name="title" id="title" required ngModel>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">URL</label>
+            <input type="text" class="form-control" placeholder="URL" name="url" id="url" required ngModel>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Description</label>
+            <input type="text" class="form-control" placeholder="Description" name="description" id="description" ngModel>
+          </div>
+
+          <div class="col-12">
+            <button type="submit" class="btn btn-success">Save</button>
+          </div>
+
+        </form>
+      </div>
+
+        <app-video-detail
+        (updateVideoEvent)="onUpdateVideoEvent($event)"
+        (deleteVideoEvent)="onDeleteVideoEvent($event)"
+        *ngIf="sv && hidden"
+        [video]="selectedVideo" >
+      </app-video-detail>
+    </div>
+
+    <div class="col-sm-3">
+      <button style="margin: 3px 0px 2px 16px;" type="button" class="btn btn-success btn-block" (click)="onClickNewVideo()">+ New Video</button>
+        <app-video-list (SelectVideo)="onSelectVideo($event)" [videos]="videos"></app-video-list>
+    </div>
+
+</div>
